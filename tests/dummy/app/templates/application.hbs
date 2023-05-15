@@ -1,5 +1,13 @@
-{{page-title "Dummy"}}
+<AuApp>
 
-<h2 id="title">Welcome to Ember</h2>
+  <DateInputPicker
+    label="Optional label"
+    start="20150101"
+    end="20151231"
+    width="block"
+    applyAction="action setDateRange"
+    hideAction="action hideDatePicker"
+    cancelAction="action cancelDatePicker"
+  />
 
-{{outlet}}
+</AuApp>

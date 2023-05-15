@@ -1,0 +1,27 @@
+<span class="au-c-input-wrapper {{this.width}}">
+  {{#if this.hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#if this.label}}
+      <label class={{this.labelClass}}>{{this.label}}</label>
+    {{/if}}
+    {{! template-lint-disable require-input-label }}
+    {{! template-lint-disable no-inline-styles }}
+    <input
+      disabled={{@disabled}}
+      placeholder="DD-MM-JJJJ"
+      autocomplete="off"
+      style="min-width: 24.5rem;"
+      value={{this.rangeText}}
+      class="au-c-input
+        {{this.inputClasses}}
+        {{this.error}}
+        {{this.warning}}
+        {{this.width}}
+        {{this.disabled}}"
+      {{did-insert this.didInsertDateInputPicker}}
+    />
+  {{/if}}
+
+  <AuIcon @icon="calendar" @alignment="left" />
+</span>

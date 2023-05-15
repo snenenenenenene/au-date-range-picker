@@ -1,0 +1,32 @@
+@import "ember-appuniversum/a-settings";
+@import "ember-appuniversum/a-tools";
+@import "ember-appuniversum/a-generic";
+@import "ember-appuniversum/a-elements";
+@import "ember-appuniversum/a-objects";
+@import "ember-appuniversum/a-components";
+@import "ember-appuniversum/a-plugins";
+@import "ember-appuniversum/a-utilities";
+
+:root {
+  --duet-color-primary: #fff;
+}
+
+.daterangepicker .ranges li.active {
+  background-color: var(--au-blue-700);
+  color: #fff;
+}
+.daterangepicker {
+  font: var(--au-font);
+}
+.daterangepicker td.active,
+.daterangepicker td.start-date.end-date {
+  background-color: var(--au-blue-700) !important;
+  border-radius: 0px;
+  &:hover {
+    background-color: var(--au-blue-900);
+  }
+}
+
+.daterangepicker td.in-range {
+  background-color: var(--au-blue-200);
+}

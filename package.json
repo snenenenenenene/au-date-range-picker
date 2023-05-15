@@ -1,29 +1,22 @@
 {
-  "name": "date-range-picker",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "name": "au-date-range-picker",
+  "version": "0.0.1",
+  "description": "A date range picker custom fit and styled to the needs of Appuniverse",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "appuniverse",
+    "daterangepicker"
   ],
-  "repository": "",
+  "repository": "https://github.com/snenenenenenene/au-date-range-picker",
   "license": "MIT",
-  "author": "",
+  "author": "snenenenenenene",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
   "scripts": {
     "build": "ember build --environment=production",
-    "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
-    "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
-    "lint:hbs": "ember-template-lint .",
-    "lint:hbs:fix": "ember-template-lint . --fix",
-    "lint:js": "eslint . --cache",
-    "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
-    "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each"
+    "start": "ember serve"
   },
   "dependencies": {
     "@embroider/macros": "^1.10.0",

@@ -1,1 +1,1 @@
-export { default } from 'date-range-picker/components/date-input-picker';
+export { default } from 'au-date-range-picker/components/date-input-picker';

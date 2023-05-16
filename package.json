@@ -7,11 +7,13 @@
     "appuniverse",
     "daterangepicker"
   ],
-  "repository": "https://github.com/snenenenenenene/au-date-range-picker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snenenenenenene/au-date-range-picker.git"
+  },
   "license": "MIT",
   "author": "snenenenenenene",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -83,5 +85,10 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/snenenenenenene/au-date-range-picker/issues"
+  },
+  "homepage": "https://github.com/snenenenenenene/au-date-range-picker#readme",
+  "main": "index.js"
 }

@@ -1,32 +1,35 @@
-# date-range-picker
+## Date Input Picker Ember Addon
 
-[Short description of the addon.]
+This Ember addon serves as a date (range) input picker component, utilizing the [Daterangepicker](https://www.daterangepicker.com/) library. It was specifically developed under the commission of the [Agency of Home Affairs (ABB)](https://www.vlaanderen.be/agentschap-binnenlands-bestuur) for integration into the [BurgernabijeBesluitenDatabank](https://burgernabije-besluitendatabank-dev.s.redhost.be/) application.
 
+### Installation
 
-## Compatibility
+To install this addon, run the following command in your Ember project:
 
-* Ember.js v3.28 or above
-* Ember CLI v3.28 or above
-* Node.js v14 or above
+`ember install date-input-picker`
 
+### Usage
 
-## Installation
+To use the date input picker component in your Ember project, simply include it in your template:
 
-```
-ember install date-range-picker
-```
+`<DateInputPicker @start={{this.startDate}} @end={{this.endDate}} @actionName={{this.handleDateRangePickerEvent}} />`
 
+You can pass in the following arguments to customize the behavior of the component:
 
-## Usage
+- **start** : The initial start date for the date range.
+- **end** : The initial end date for the date range.
+- **actionName** : The name of the action to be called when the date range is changed.
 
-[Longer description of how to use the addon in apps.]
+### Development
 
+To run the tests for this addon, run the following command:
 
-## Contributing
+`ember test`
 
-See the [Contributing](CONTRIBUTING.md) guide for details.
+### Contributing
 
+Contributions to this addon are welcome. Please submit a pull request with your changes.
 
-## License
+### License
 
-This project is licensed under the [MIT License](LICENSE.md).
+This addon is licensed under the MIT License. See the LICENSE file for details.

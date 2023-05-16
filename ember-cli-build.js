@@ -16,6 +16,9 @@ module.exports = function (defaults) {
 
   const { maybeEmbroider } = require('@embroider/test-setup');
   return maybeEmbroider(app, {
+    '@appuniversum/ember-appuniversum': {
+      disableWormholeElement: true,
+    },
     skipBabel: [
       {
         package: 'qunit',

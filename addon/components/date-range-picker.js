@@ -1,3 +1,4 @@
+/* eslint-disable ember/jquery-ember-run */
 /* eslint-disable ember/no-jquery */
 
 import { assert } from '@ember/debug';
@@ -8,10 +9,10 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import $ from 'jquery';
 import moment from 'moment';
-import layout from './date-input-picker';
+import layout from './date-range-picker';
 const noop = function () {};
 
-export default class DateInputPicker extends Component {
+export default class DateRangePicker extends Component {
   //TODO: get all options from attr.
   @tracked layout = layout;
   @tracked classNameBindings = ['containerClass', 'au-c-content '];
@@ -67,9 +68,9 @@ export default class DateInputPicker extends Component {
     }
     return '';
   }
-
   @tracked opens = null;
   @tracked drops = null;
+  @tracked regional = 'be-nl';
   @tracked separator = ' - ';
   @tracked singleDatePicker = false;
   @tracked placeholder = 'Aangepast bereik';
@@ -123,7 +124,6 @@ export default class DateInputPicker extends Component {
   @action didInsertDateInputPicker() {
     // daterangepicker(this.getOptions());
     $('.daterangepicker-input').daterangepicker(this.getOptions());
-    console.log('did it work?');
     this.attachPickerEvents();
   }
 
@@ -182,6 +182,7 @@ export default class DateInputPicker extends Component {
       cancelLabel: this.cancelLabel,
       customRangeLabel: this.customRangeLabel,
       daysOfWeek: this.daysOfWeek,
+      regional: this.regional,
       direction: this.direction,
       firstDay: this.firstDay,
       format: this.format,

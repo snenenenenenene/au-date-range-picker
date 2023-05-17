@@ -1,6 +1,6 @@
 {
   "name": "au-date-range-picker",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A date range picker custom fit and styled to the needs of Appuniverse",
   "keywords": [
     "ember-addon",

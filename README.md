@@ -18,7 +18,7 @@ You can pass in the following arguments to customize the behavior of the compone
 
 - **start** : The initial start date for the date range.
 - **end** : The initial end date for the date range.
-- **actionName** : The name of the action to be called when the date range is changed.
+- **actionName** : The name of the action to be called when the date range is changed. This action will be called with 3 args: **picker**, **start** and **end**
 
 ### Development
 

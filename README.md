@@ -12,7 +12,29 @@ To install this addon, run the following command in your Ember project:
 
 To use the date input picker component in your Ember project, simply include it in your template:
 
-`<DateInputPicker @start={{this.startDate}} @end={{this.endDate}} @actionName={{this.handleDateRangePickerEvent}} />`
+```hbs
+<AuDateRangePicker
+  @label="Optional label"
+  @start="20150101"
+  @end="20151231"
+  @width="block"
+  @cancelAction={{action this.cancelDatePicker}}
+  @applyAction={{action this.applyDatePicker}}
+  @hideAction={{action this.hideDatePicker}}
+/>
+```
+
+```js
+@action applyDatePicker(picker, start, end) {
+    this.dateRange = start + ' - ' + end;
+}
+
+@action hideDatePicker(picker, start, end) {
+    return this.start;
+}
+
+@action cancel(picker, start, end) {}
+```
 
 You can pass in the following arguments to customize the behavior of the component:
 

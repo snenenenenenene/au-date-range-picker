@@ -1,7 +1,6 @@
 /* eslint-disable ember/jquery-ember-run */
 /* eslint-disable ember/no-jquery */
 
-import { assert } from '@ember/debug';
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
 import { isEmpty } from '@ember/utils';
@@ -54,11 +53,6 @@ export default class DateRangePicker extends Component {
   }
 
   get rangeText() {
-    console.log(
-      moment(this.start, this.serverFormat).format(this.format) +
-        this.separator +
-        moment(this.end, this.serverFormat).format(this.format)
-    );
     if (!isEmpty(this.start) && !isEmpty(this.end)) {
       return (
         moment(this.start, this.serverFormat).format(this.format) +
@@ -68,6 +62,7 @@ export default class DateRangePicker extends Component {
     }
     return '';
   }
+
   @tracked opens = null;
   @tracked drops = null;
   @tracked regional = 'be-nl';
@@ -109,9 +104,7 @@ export default class DateRangePicker extends Component {
   @tracked showCustomRangeLabel = false;
   @tracked fromLabel = 'Van';
   @tracked toLabel = 'Tot';
-  @tracked hideAction = null;
-  @tracked applyAction = null;
-  @tracked cancelAction = null;
+
   @tracked autoUpdateInput = true;
   @tracked autoApply = false;
   @tracked alwaysShowCalendars = true;
@@ -120,15 +113,20 @@ export default class DateRangePicker extends Component {
   @tracked isInvalidDate = noop;
   @tracked isCustomDate = noop;
 
-  // Init the dropdown when the component is added to the DOM
+  /* WRAPPER CODE: all the code that is meant to interact with the wrapper date-range-picker */
   @action didInsertDateInputPicker() {
+    console.log(this);
+    $(this).on('cancel', function () {
+      console.log('meowe');
+    });
+    // Init the dropdown when the component is added to the DOM
     // daterangepicker(this.getOptions());
     $('.daterangepicker-input').daterangepicker(this.getOptions());
     this.attachPickerEvents();
   }
 
-  // Remove the hidden dropdown when this component is destroyed
   willDestroy() {
+    // Remove the hidden dropdown when this component is destroyed
     super.willDestroy(...arguments);
     super.willDestroy(...arguments);
 
@@ -140,6 +138,7 @@ export default class DateRangePicker extends Component {
   }
 
   @action getOptions() {
+    // get options to pass to the internal date-range-picker
     let momentStartDate = moment(this.start, this.serverFormat);
     let momentEndDate = moment(this.end, this.serverFormat);
 
@@ -208,6 +207,17 @@ export default class DateRangePicker extends Component {
     return { ...options, ...defaultOptions };
   }
 
+  /* ACTIONS: all the code to run events from au-date-range-picker */
+  @action hideAction() {
+    // console.log(...this.args);
+    return this.start;
+  }
+  @action applyAction(picker, start, end) {
+    console.log(picker);
+    console.log(start, end);
+    return start, end;
+  }
+
   @action attachPickerEvents() {
     $('.daterangepicker-input').on('apply.daterangepicker', (_ev, picker) => {
       this.handleDateRangePickerEvent('applyAction', picker);
@@ -217,27 +227,22 @@ export default class DateRangePicker extends Component {
       this.handleDateRangePickerEvent('hideAction', picker);
     });
 
-    $('.daterangepicker-input').on('cancel.daterangepicker', () => {
-      this.handleDateRangePickerEvent('cancelAction', undefined, true);
+    $('.daterangepicker-input').on('cancel.daterangepicker', (_ev, picker) => {
+      this.handleDateRangePickerEvent('cancelAction', picker);
     });
   }
 
-  @action handleDateRangePickerEvent(actionName, picker, isCancel = false) {
-    let action = this.args.actionName;
-    let start;
-    let end;
-
-    if (!isCancel) {
-      start = picker.startDate.format(this.serverFormat);
-      end = picker.endDate.format(this.serverFormat);
-    }
+  @action handleDateRangePickerEvent(actionName, picker) {
+    let action = this.args[actionName];
+    let start = picker.startDate.format(this.serverFormat);
+    let end = picker.endDate.format(this.serverFormat);
 
     if (action) {
-      assert(
-        `${actionName} for date-range-picker must be a function`,
-        typeof action === 'function'
-      );
-      // this.sendAction(actionName, start, end, picker);
+      // assert(
+      //   `${actionName} for date-range-picker must be a function`,
+      //   typeof action === 'function'
+      // );
+      action(this, start, end);
     } else {
       if (!this.isDestroyed) {
         this.start = start;

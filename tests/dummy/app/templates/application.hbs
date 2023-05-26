@@ -1,21 +1,14 @@
 <AuApp>
-  {{! <DateRangePicker
-    label="Optional label"
-    start="20150101"
-    end="20151231"
-    width="block"
-    applyAction="action setDateRange"
-    hideAction="action hideDatePicker"
-    cancelAction="action cancelDatePicker"
-  /> }}
+  {{this.dateRange}}
+  {{! template-lint-disable no-action }}
   <AuDateRangePicker
-    label="Optional label"
-    start="20150101"
-    end="20151231"
-    width="block"
-    applyAction="action setDateRange"
-    hideAction="action hideDatePicker"
-    cancelAction="action cancelDatePicker"
+    @label="Optional label"
+    @start="20150101"
+    @end="20151231"
+    @width="block"
+    @cancelAction={{action this.cancel}}
+    @applyAction={{action this.applyDatePicker}}
+    @hideAction={{action this.hideDatePicker}}
   />
 
 </AuApp>

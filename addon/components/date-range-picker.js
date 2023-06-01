@@ -16,8 +16,12 @@ export default class DateRangePicker extends Component {
   @tracked layout = layout;
   @tracked classNameBindings = ['containerClass', 'au-c-content '];
   @tracked attributeBindings = ['start', 'end', 'serverFormat'];
-  @tracked start = undefined;
-  @tracked end = undefined;
+  get start() {
+    return this.args.start || undefined;
+  }
+  get end() {
+    return this.args.end || undefined;
+  }
   @tracked minDate = undefined;
   @tracked maxDate = undefined;
   @tracked timePicker = false;

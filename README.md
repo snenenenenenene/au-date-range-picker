@@ -15,8 +15,8 @@ To use the date input picker component in your Ember project, simply include it 
 ```hbs
 <AuDateRangePicker
   @label="Optional label"
-  @start="20150101"
-  @end="20151231"
+  @start="2023-01-01"
+  @end="2023-12-31"
   @width="block"
   @cancelAction={{action this.cancelDatePicker}}
   @applyAction={{action this.applyDatePicker}}

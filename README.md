@@ -6,7 +6,7 @@ This Ember addon serves as a date (range) input picker component, utilizing the 
 
 To install this addon, run the following command in your Ember project:
 
-`ember install date-input-picker`
+`ember install au-date-range-picker`
 
 ### Usage
 

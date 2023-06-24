@@ -16,25 +16,96 @@ export default class DateRangePicker extends Component {
   @tracked layout = layout;
   @tracked classNameBindings = ['containerClass', 'au-c-content '];
   @tracked attributeBindings = ['start', 'end', 'serverFormat'];
+
+
+  /* OPTIONS */
+
+  // Options: Format 
+  @tracked format = this.args.format || 'D MMM, YYYY';  // Foraaaamat
+  @tracked serverFormat = this.args.serverFormat || 'YYYY-MM-DD';
+  @tracked direction = this.args.direction || 'ltr';
+  @tracked regional = this.args.regional || 'be-nl';
+  @tracked separator = this.args.seperator || ' - ';
+  
+
+  // Options: Range
+  @tracked singleDatePicker = this.args.singleDatePicker || false;
+  @tracked minDate = this.args.minDate || undefined;
+  @tracked maxDate = this.args.maxDate || undefined;
+  @tracked datelimit = this.args.datelimit || false;
+  @tracked ranges = this.args.ranges || {
+    Vandaag: [moment().startOf('day'), moment().endOf('day')],
+    Gisteren: [
+      moment().subtract(1, 'days').startOf('day'),
+      moment().subtract(1, 'days').endOf('day'),
+    ],
+    'Voorbije Week': [moment().subtract(7, 'days'), moment()],
+    'Voorbije 30 Dagen': [moment().subtract(30, 'days'), moment()],
+    'Deze Maand': [moment().startOf('month'), moment().endOf('month')],
+    'Vorige Maand': [
+      moment().subtract(1, 'month').startOf('month'),
+      moment().subtract(1, 'month').endOf('month'),
+    ],
+  };
+
+  // Options: Appearance
+  @tracked firstDay = this.args.firstDay || 0;
+  @tracked placeholder = this.args.placeholder || 'Aangepast bereik';
+  @tracked daysOfWeek = this.args.daysOfWeek || moment.weekdaysMin();
+  @tracked monthNames = this.args.monthNames || moment.monthsShort();
+  @tracked cancelLabel = this.args.cancelLabel || 'Terug';
+  @tracked applyLabel = this.args.applyLabel || 'Verder';
+  @tracked customRangeLabel = this.args.customRangeLabel || 'Aangepast bereik';
+  @tracked showCustomRangeLabel = this.args.showCustomRangeLabel || false;
+  @tracked fromLabel = this.args.fromLabel || 'Van';
+  @tracked toLabel = this.args.toLabel || 'Tot';
+  @tracked showWeekNumbers = this.args.showWeekNumbers || false;
+  @tracked showDropdowns = this.args.showDropdowns || false;
+  
+
+  // Options: Classes
+  @tracked containerClass = this.args.containerClass || 'form-group au-c-content ';
+  @tracked inputClass = this.args.inputClass || 'form-control';
+  @tracked buttonClasses = this.args.buttonClasses || ['au-c-button'];  // Meow
+  @tracked applyClass = this.args.applyClass || 'au-c-button--primary';
+  @tracked cancelClass = this.args.cancelClass || 'au-c-button--secondary au-u-margin-right-tiny';
+  @tracked labelClass = this.args.labelClass || 'au-u-h5';
+    
+  // Options: TimePicker
+  @tracked timePicker = this.args.timePicker || false;  // Wao
+  @tracked timePicker24Hour = this.args.timePicker24Hour || false; 
+  @tracked timePickerSeconds = this.args.timePickerSeconds || false;
+  @tracked timePickerIncrement = this.args.timePickerIncrement || undefined;
+
+  // Options: Dom behaviour
+  @tracked autoUpdateInput = this.args.autoUpdateInput || true;
+  @tracked autoApply = this.args.autoApply || false;
+  @tracked alwaysShowCalendars = this.args.alwaysShowCalendars || true;
+  @tracked context = this.args.context || undefined;
+  @tracked removeDropdownOnDestroy = this.args.removeDropdownOnDestroy || false;
+  @tracked parentEl = this.args.parentEl || 'body';
+
+  // Options: Other
+  @tracked isInvalidDate = this.args.isInvalidDate || noop;
+  @tracked isCustomDate = this.args.isCustomDate || noop;
+  @tracked opens = this.args.opens || null;
+  @tracked drops = this.args.drops || null;
+  @tracked linkedCalendars = this.args.linkedCalendars || false;
+
+
+  /* GETTERS */
+  get inputClasses() {
+    return this.inputClass
+      ? 'daterangepicker-input ember-text-field ember-view' + this.inputClass
+      : 'daterangepicker-input ember-text-field ember-view';
+  }
+
   get start() {
     return this.args.start || undefined;
   }
   get end() {
     return this.args.end || undefined;
   }
-  @tracked minDate = undefined;
-  @tracked maxDate = undefined;
-  @tracked timePicker = false;
-  @tracked timePicker24Hour = false;
-  @tracked timePickerSeconds = false;
-  @tracked timePickerIncrement = undefined;
-  @tracked showWeekNumbers = false;
-  @tracked showDropdowns = false;
-  @tracked linkedCalendars = false;
-  @tracked datelimit = false;
-  @tracked parentEl = 'body';
-  @tracked format = 'D MMM, YYYY';
-  @tracked serverFormat = 'YYYY-MM-DD';
 
   get width() {
     if (this.args.width == 'block') return 'au-c-input--block';
@@ -66,56 +137,6 @@ export default class DateRangePicker extends Component {
     }
     return '';
   }
-
-  @tracked opens = null;
-  @tracked drops = null;
-  @tracked regional = 'be-nl';
-  @tracked separator = ' - ';
-  @tracked singleDatePicker = false;
-  @tracked placeholder = 'Aangepast bereik';
-  @tracked containerClass = 'form-group au-c-content ';
-  @tracked inputClass = 'form-control';
-  get inputClasses() {
-    return this.inputClass
-      ? 'daterangepicker-input ember-text-field ember-view' + this.inputClass
-      : 'daterangepicker-input ember-text-field ember-view';
-  }
-  @tracked buttonClasses = ['au-c-button'];
-  @tracked applyClass = 'au-c-button--primary';
-  @tracked cancelClass = 'au-c-button--secondary au-u-margin-right-tiny';
-  @tracked labelClass = 'au-u-h5';
-  @tracked direction = 'ltr';
-  @tracked ranges = {
-    Vandaag: [moment().startOf('day'), moment().endOf('day')],
-    Gisteren: [
-      moment().subtract(1, 'days').startOf('day'),
-      moment().subtract(1, 'days').endOf('day'),
-    ],
-    'Voorbije Week': [moment().subtract(7, 'days'), moment()],
-    'Voorbije 30 Dagen': [moment().subtract(30, 'days'), moment()],
-    'Deze Maand': [moment().startOf('month'), moment().endOf('month')],
-    'Vorige Maand': [
-      moment().subtract(1, 'month').startOf('month'),
-      moment().subtract(1, 'month').endOf('month'),
-    ],
-  };
-  @tracked daysOfWeek = moment.weekdaysMin();
-  @tracked monthNames = moment.monthsShort();
-  @tracked removeDropdownOnDestroy = false;
-  @tracked cancelLabel = 'Terug';
-  @tracked applyLabel = 'Verder';
-  @tracked customRangeLabel = 'Aangepast bereik';
-  @tracked showCustomRangeLabel = false;
-  @tracked fromLabel = 'Van';
-  @tracked toLabel = 'Tot';
-
-  @tracked autoUpdateInput = true;
-  @tracked autoApply = false;
-  @tracked alwaysShowCalendars = true;
-  @tracked context = undefined;
-  @tracked firstDay = 0;
-  @tracked isInvalidDate = noop;
-  @tracked isCustomDate = noop;
 
   /* WRAPPER CODE: all the code that is meant to interact with the wrapper date-range-picker */
   @action didInsertDateInputPicker() {

@@ -43,9 +43,7 @@ You can pass in the following arguments to customize the behavior of the compone
 - **actionName** : The name of the action to be called when the date range is changed. This action will be called with 3 args: **picker**, **start** and **end**
 
 ### Configuration
-
 The following options can be passed to `<AuDateRangePicker>`:
-
 
 
 #### Format 
@@ -131,6 +129,7 @@ The following options can be passed to `<AuDateRangePicker>`:
 | @drops | `null` |  |
 | @linkedCalendars | `false` |  |
 
+
 #### Ranges
 `@ranges` defines the preset ranges on the left of the date picker.
 The following format has to be passed:
@@ -153,7 +152,6 @@ You can optionally use moment.js for dynamic assignment
 }
 ```
 
-
 ### Development
 
 To run the tests for this addon, run the following command:
@@ -163,6 +161,9 @@ To run the tests for this addon, run the following command:
 ### Contributing
 
 Contributions to this addon are welcome. Please submit a pull request with your changes.
+
+#### Updating documentation
+If you've added or modified any options in [date-range-picker.js](addon/components/date-range-picker.js), you can run `npm run docs` to automatically update the configuration table. `npm run docs` is run automatically when using `npm run build` as well. 
 
 ### License
 

@@ -21,19 +21,19 @@ export default class DateRangePicker extends Component {
   /* OPTIONS */
 
   // Options: Format 
-  @tracked format = this.args.format || 'D MMM, YYYY';  // Foraaaamat
+  @tracked format = this.args.format || 'D MMM, YYYY';
   @tracked serverFormat = this.args.serverFormat || 'YYYY-MM-DD';
-  @tracked direction = this.args.direction || 'ltr';
-  @tracked regional = this.args.regional || 'be-nl';
-  @tracked separator = this.args.seperator || ' - ';
+  @tracked direction = this.args.direction || 'ltr';  // Locale setting for text direction
+  @tracked regional = this.args.regional || 'be-nl';  // Selected region
+  @tracked separator = this.args.seperator || ' - ';  // What character(s) to put between range
   
 
   // Options: Range
-  @tracked singleDatePicker = this.args.singleDatePicker || false;
-  @tracked minDate = this.args.minDate || undefined;
-  @tracked maxDate = this.args.maxDate || undefined;
+  @tracked singleDatePicker = this.args.singleDatePicker || false;  // Whether to only select a single date (instead of the default two)
+  @tracked minDate = this.args.minDate || undefined;  // Lowest possible date. If undefined, no limit is set
+  @tracked maxDate = this.args.maxDate || undefined;  // Highest possible date. If undefined, no limit is set
   @tracked datelimit = this.args.datelimit || false;
-  @tracked ranges = this.args.ranges || {
+  @tracked ranges = this.args.ranges || {  // This is not picked up by docs.mjs, and is documented seperately in README.md 
     Vandaag: [moment().startOf('day'), moment().endOf('day')],
     Gisteren: [
       moment().subtract(1, 'days').startOf('day'),
@@ -49,12 +49,12 @@ export default class DateRangePicker extends Component {
   };
 
   // Options: Appearance
-  @tracked firstDay = this.args.firstDay || 0;
+  @tracked firstDay = this.args.firstDay || 0;  // What day of the week to start with. 0 = sunday, 1 = monday...
   @tracked placeholder = this.args.placeholder || 'Aangepast bereik';
   @tracked daysOfWeek = this.args.daysOfWeek || moment.weekdaysMin();
   @tracked monthNames = this.args.monthNames || moment.monthsShort();
-  @tracked cancelLabel = this.args.cancelLabel || 'Terug';
-  @tracked applyLabel = this.args.applyLabel || 'Verder';
+  @tracked cancelLabel = this.args.cancelLabel || 'Terug';  // Text on the cancel button
+  @tracked applyLabel = this.args.applyLabel || 'Verder';  // Text on the apply button
   @tracked customRangeLabel = this.args.customRangeLabel || 'Aangepast bereik';
   @tracked showCustomRangeLabel = this.args.showCustomRangeLabel || false;
   @tracked fromLabel = this.args.fromLabel || 'Van';
@@ -64,15 +64,15 @@ export default class DateRangePicker extends Component {
   
 
   // Options: Classes
-  @tracked containerClass = this.args.containerClass || 'form-group au-c-content ';
-  @tracked inputClass = this.args.inputClass || 'form-control';
-  @tracked buttonClasses = this.args.buttonClasses || ['au-c-button'];  // Meow
-  @tracked applyClass = this.args.applyClass || 'au-c-button--primary';
-  @tracked cancelClass = this.args.cancelClass || 'au-c-button--secondary au-u-margin-right-tiny';
-  @tracked labelClass = this.args.labelClass || 'au-u-h5';
+  @tracked containerClass = this.args.containerClass || 'form-group au-c-content ';  // Class for the container
+  @tracked inputClass = this.args.inputClass || 'form-control';  // Class for the input
+  @tracked buttonClasses = this.args.buttonClasses || ['au-c-button'];  // Classes for the buttons
+  @tracked applyClass = this.args.applyClass || 'au-c-button--primary';  // Class for the apply button
+  @tracked cancelClass = this.args.cancelClass || 'au-c-button--secondary au-u-margin-right-tiny';  // Class for the cancel button
+  @tracked labelClass = this.args.labelClass || 'au-u-h5';  // Class for all labels/buttons
     
   // Options: TimePicker
-  @tracked timePicker = this.args.timePicker || false;  // Wao
+  @tracked timePicker = this.args.timePicker || false;  // Whether to enable the timePicker
   @tracked timePicker24Hour = this.args.timePicker24Hour || false; 
   @tracked timePickerSeconds = this.args.timePickerSeconds || false;
   @tracked timePickerIncrement = this.args.timePickerIncrement || undefined;

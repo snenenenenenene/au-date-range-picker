@@ -42,6 +42,116 @@ You can pass in the following arguments to customize the behavior of the compone
 - **end** : The initial end date for the date range.
 - **actionName** : The name of the action to be called when the date range is changed. This action will be called with 3 args: **picker**, **start** and **end**
 
+### Configuration
+The following options can be passed to `<AuDateRangePicker>`:
+
+
+#### Format 
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @format | `'D MMM, YYYY'` |  |
+| @serverFormat | `'YYYY-MM-DD'` |  |
+| @direction | `'ltr'` | Locale setting for text direction |
+| @regional | `'be-nl'` | Selected region |
+| @separator | `' - '` | What character(s) to put between range |
+
+
+#### Range
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @singleDatePicker | `false` | Whether to only select a single date (instead of the default two) |
+| @minDate | `undefined` | Lowest possible date. If undefined, no limit is set |
+| @maxDate | `undefined` | Highest possible date. If undefined, no limit is set |
+| @datelimit | `false` |  |
+
+
+#### Appearance
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @firstDay | `0` | What day of the week to start with. 0 = sunday, 1 = monday... |
+| @placeholder | `'Aangepast bereik'` |  |
+| @daysOfWeek | `moment.weekdaysMin()` |  |
+| @monthNames | `moment.monthsShort()` |  |
+| @cancelLabel | `'Terug'` | Text on the cancel button |
+| @applyLabel | `'Verder'` | Text on the apply button |
+| @customRangeLabel | `'Aangepast bereik'` |  |
+| @showCustomRangeLabel | `false` |  |
+| @fromLabel | `'Van'` |  |
+| @toLabel | `'Tot'` |  |
+| @showWeekNumbers | `false` |  |
+| @showDropdowns | `false` |  |
+
+
+#### Classes
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @containerClass | `'form-group au-c-content '` | Class for the container |
+| @inputClass | `'form-control'` | Class for the input |
+| @buttonClasses | `['au-c-button']` | Classes for the buttons |
+| @applyClass | `'au-c-button--primary'` | Class for the apply button |
+| @cancelClass | `'au-c-button--secondary au-u-margin-right-tiny'` | Class for the cancel button |
+| @labelClass | `'au-u-h5'` | Class for all labels/buttons |
+
+
+#### TimePicker
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @timePicker | `false` | Whether to enable the timePicker |
+| @timePicker24Hour | `false` |  |
+| @timePickerSeconds | `false` |  |
+| @timePickerIncrement | `undefined` |  |
+
+
+#### Dom behaviour
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @autoUpdateInput | `true` |  |
+| @autoApply | `false` |  |
+| @alwaysShowCalendars | `true` |  |
+| @context | `undefined` |  |
+| @removeDropdownOnDestroy | `false` |  |
+| @parentEl | `'body'` |  |
+
+
+#### Other
+
+| Name     | Default value | Description |
+| -------- | ------------- | ----------- |
+| @isInvalidDate | `noop` |  |
+| @isCustomDate | `noop` |  |
+| @opens | `null` |  |
+| @drops | `null` |  |
+| @linkedCalendars | `false` |  |
+
+
+#### Ranges
+`@ranges` defines the preset ranges on the left of the date picker.
+The following format has to be passed:
+
+```js
+{
+    PRESET-NAME: [STARTDATE, ENDDATE]
+}
+```
+
+
+You can optionally use moment.js for dynamic assignment
+```js
+{
+    Yesterday: [
+        moment().subtract(1, 'days').startOf('day'),
+        moment().subtract(1, 'days').endOf('day'),
+    ],
+    'Last week': [moment().subtract(7, 'days'), moment()],
+}
+```
+
 ### Development
 
 To run the tests for this addon, run the following command:
@@ -51,6 +161,9 @@ To run the tests for this addon, run the following command:
 ### Contributing
 
 Contributions to this addon are welcome. Please submit a pull request with your changes.
+
+#### Updating documentation
+If you've added or modified any options in [date-range-picker.js](addon/components/date-range-picker.js), you can run `npm run docs` to automatically update the configuration table. `npm run docs` is run automatically when using `npm run build` as well. 
 
 ### License
 

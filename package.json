@@ -17,8 +17,9 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build --environment=production",
-    "start": "ember serve"
+    "build": "npm run docs && ember build --environment=production",
+    "start": "ember serve",
+    "docs": "node utils/docs.mjs"
   },
   "dependencies": {
     "@embroider/macros": "^1.10.0",
